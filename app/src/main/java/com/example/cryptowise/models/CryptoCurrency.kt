@@ -1,15 +1,17 @@
 package com.example.cryptowise.models
 
+import java.io.Serializable
+
 data class CryptoCurrency(
     val auditInfoList: List<AuditInfo>,
     val circulatingSupply: Double,
-    val cmcRank: Int,
+    val cmcRank: Double,
     val dateAdded: String,
     val id: Int,
-    val isActive: Int,
+    val isActive: Double,
     val isAudited: Boolean,
     val lastUpdated: String,
-    val marketPairCount: Int,
+    val marketPairCount: Double,
     val maxSupply: Double,
     val name: String,
     val platform: Platform,
@@ -19,4 +21,16 @@ data class CryptoCurrency(
     val symbol: String,
     val tags: List<String>,
     val totalSupply: Double
-)
+) : Serializable{
+    override fun equals(other: Any?): Boolean {
+        return super.equals(other)
+    }
+
+    override fun hashCode(): Int {
+        return super.hashCode()
+    }
+
+    override fun toString(): String {
+        return super.toString()
+    }
+}

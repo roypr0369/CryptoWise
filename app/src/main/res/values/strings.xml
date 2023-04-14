@@ -15,4 +15,5 @@
     <string name="not_found">Not Found</string>
     <string name="watchlist_fragment">WatchList fragment</string>
     <string name="empty_watchlist">Empty Watchlist</string>
+    <string name="api">https://api.coinmarketcap.com/</string>
 </resources>
