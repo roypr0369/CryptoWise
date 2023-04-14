@@ -9,10 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.cryptowise.R
 import com.example.cryptowise.databinding.CurrencyItemLayoutBinding
-import com.example.cryptowise.fragment.HomeFragmentDirections
+import com.example.cryptowise.fragment.*
 import com.example.cryptowise.models.CryptoCurrency
 
-class MarketAdapter(var context: Context, var list: List<CryptoCurrency>): RecyclerView.Adapter<MarketAdapter.MarketViewHolder>(){
+class MarketAdapter(var context: Context, var list: List<CryptoCurrency>, var type: String): RecyclerView.Adapter<MarketAdapter.MarketViewHolder>(){
     inner class MarketViewHolder(view: View): RecyclerView.ViewHolder(view){
         val binding = CurrencyItemLayoutBinding.bind(view)
     }
@@ -25,6 +25,10 @@ class MarketAdapter(var context: Context, var list: List<CryptoCurrency>): Recyc
         return list.size
     }
 
+    fun updateData(dataItem: List<CryptoCurrency>){
+        list = dataItem
+        notifyDataSetChanged()
+    }
     override fun onBindViewHolder(holder: MarketViewHolder, position: Int) {
         val item = list[position]
         holder.binding.currencyNameTextView.text = item.name
@@ -51,9 +55,19 @@ class MarketAdapter(var context: Context, var list: List<CryptoCurrency>): Recyc
 
         }
         holder.itemView.setOnClickListener {
-            findNavController(it).navigate(
-                HomeFragmentDirections.actionHomeFragmentToDetailsFragment(item)
-            )
+            if (type == "home") {
+                findNavController(it).navigate(
+                    HomeFragmentDirections.actionHomeFragmentToDetailsFragment(item)
+                )
+            }else if(type == "market"){
+                findNavController(it).navigate(
+                    MarketFragmentDirections.actionMarketFragmentToDetailsFragment(item)
+                )
+            }else{
+                findNavController(it).navigate(
+                    WatchListFragmentDirections.actionWatchListFragmentToDetailsFragment(item)
+                )
+            }
         }
     }
 }
